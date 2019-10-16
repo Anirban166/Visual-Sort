@@ -18,19 +18,24 @@ const SECONDARY_COLOR = '#5eff00d5';
 document.body.style = 'background: black;';
 
 //--------------------------------------------------------------
-export default class SortingVisualizer extends React.Component {
-  constructor(props) {
+export default class VisualSort extends React.Component 
+{
+  constructor(props) 
+  {
     super(props);
-    this.state = {
+    this.state = 
+      {
       array: [],
     };
   }
 
-  componentDidMount() {
+  componentDidMount() 
+  {
     this.resetArray();
   }
 
-  resetArray() {
+  resetArray() 
+  {
     const array = [];
     for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
       array.push(randomIntFromInterval(5, 730));
@@ -38,22 +43,28 @@ export default class SortingVisualizer extends React.Component {
     this.setState({array});
   }
 
-  mergeSort() {
+  mergeSort() 
+  {
     const animations = getMergeSortAnimations(this.state.array);
-    for (let i = 0; i < animations.length; i++) {
+    for (let i = 0; i < animations.length; i++)
+    {
       const arrayBars = document.getElementsByClassName('array-bar');
       const isColorChange = i % 3 !== 2;
-      if (isColorChange) {
+      if (isColorChange)
+      {
         const [barOneIdx, barTwoIdx] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
         const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
-        setTimeout(() => {
+        setTimeout(() => 
+                   {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
         }, i * ANIMATION_SPEED_MS);
-      } else {
-        setTimeout(() => {
+      } else 
+      {
+        setTimeout(() => 
+        {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
           barOneStyle.height = `${newHeight}px`;
@@ -65,11 +76,14 @@ export default class SortingVisualizer extends React.Component {
   // NOTE: This method will only work if your sorting algorithms actually return
   // the sorted arrays; if they return the animations (as they currently do), then
   // this method will be broken.
-  testSortingAlgorithms() {
-    for (let i = 0; i < 100; i++) {
+  testSortingAlgorithms() 
+  {
+    for (let i = 0; i < 100; i++)
+    {
       const array = [];
       const length = randomIntFromInterval(1, 1000);
-      for (let i = 0; i < length; i++) {
+      for (let i = 0; i < length; i++)
+      {
         array.push(randomIntFromInterval(-1000, 1000));
       }
       const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
@@ -78,12 +92,14 @@ export default class SortingVisualizer extends React.Component {
     }
   }
 
-  render() {
+  render() 
+  {
     const {array} = this.state;
 
     return (
       <div className="array-container">
-        {array.map((value, idx) => (
+        {
+          array.map((value, idx) => (
           <div
             className="array-bar"
             key={idx}
@@ -100,15 +116,19 @@ export default class SortingVisualizer extends React.Component {
   }
 }
 
-function randomIntFromInterval(min, max) {
+function randomIntFromInterval(min, max)
+{
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function arraysAreEqual(arrayOne, arrayTwo) {
+function arraysAreEqual(arrayOne, arrayTwo)
+{
   if (arrayOne.length !== arrayTwo.length) return false;
-  for (let i = 0; i < arrayOne.length; i++) {
-    if (arrayOne[i] !== arrayTwo[i]) {
+  for (let i = 0; i < arrayOne.length; i++) 
+  {
+    if (arrayOne[i] !== arrayTwo[i]) 
+    {
       return false;
     }
   }
